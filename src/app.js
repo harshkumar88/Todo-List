@@ -17,6 +17,8 @@ hbs.registerPartials(partialsPath);
 app.use(cookieParser())
 app.use(registerRouter)
 
+
+
 app.get("/",(req,res)=>{
        res.render('login',{
            title:"Log In"
