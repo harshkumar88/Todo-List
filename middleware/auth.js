@@ -34,12 +34,13 @@ const auth= async(req,res,next)=>{
                     var date=now.getDate();
                     let h=now.getHours();
                     let m=now.getMinutes();
-                    console.log(date)
+                    console.log("hour: ",h,"min:",m)
                     const find= await List.find({variable:user.email})
-                var list;
+                
                     find.forEach(function(l){
                         if( l.date!=date){
-                           list= List.deleteMany({$ne:{date:date}},function(err){
+                            console.log("date")
+                            List.deleteMany({$ne:{date:date}},function(err){
                                 if(err){
                                     
                                     console.log(err)
@@ -52,22 +53,11 @@ const auth= async(req,res,next)=>{
                             
                             
                         }
-                           else if(l.hour==h && l.min<m){
-                               console.log(l.min)
-                              
-                                list=List.deleteMany({hour:h ,$lt:{min:m} },function(err){
-                                    if(err){
-                                        console.log(err)
-                                    }
-                                    else{
-                                        console.log("successful")
-                                    }
-                                })
-                           }
+                           
                     })
                       
                     const findlist= await List.find({variable:user.email})
-                    console.log(findlist)
+                    
                     var arr=[];
                     var hours=[];
                     var minutes=[];
@@ -76,7 +66,7 @@ const auth= async(req,res,next)=>{
                         hours.push(list.hour)
                         minutes.push(list.min)
                     })
-                    console.log(arr,hours,minutes)
+                   
                     if(findlist){
                         return res.render("todo-list",{
                             data:arr,

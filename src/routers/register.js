@@ -134,6 +134,14 @@ router.post("/todo-list",async(req,res)=>{
 
             var now=new Date();
             var date=now.getDate();
+            let h=now.getHours();
+            let m=now.getMinutes();
+
+            if((h>=hour && m>min)){
+                   return res.render("todo-list",{
+                       msg:"Please provide a time which in not in past"
+                   })
+            }
 
              const list=new List({
                  data:dataadd,
