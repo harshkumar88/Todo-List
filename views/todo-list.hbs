@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"></head>
+    <body>
+        {{>header}}
+        <br>
+        <form action="/todo-list" method="post">
+        <input type="number" min="0" max="23" placeholder="23" name="hour" required>:
+        <input type="number" min="0" max="59" placeholder="00" name="min" required> 
+            <input type="text" name="todo" required placeholder="WORK ">
+            <button type="submit"> Add </button>
+        </form>
+        <h1 id="tasks"></h1>
+        <h1 id="getdata" style="display: none;">{{data}}</h1>
+        <h1 id="gethour" style="display: none;">{{hour}}</h1>
+        <h1 id="getmin" style="display: none;">{{min}}</h1>
+         <div id="append">
+             
+         </div>
+        <h1>{{value}}</h1>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+              var $div=document.getElementById("append")
+              var $data=document.getElementById("getdata").innerHTML
+              var $hour=document.getElementById("gethour").innerHTML
+               var $min=document.getElementById("getmin").innerHTML
+               var $task=document.getElementById("tasks")
+              var arr=$data.split(",")
+              var hour=$hour.split(",")
+              var min=$min.split(",")
+              
+              var months=[
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "June",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+        ];
+              var now=new Date()
+              var date=now.getDate();
+              var month=months[now.getMonth()];
+              $task.innerHTML="TASKS for -> "+date+" "+month
+              var Am=[];
+              var j=0;
+              console.log(hour,min)
+              hour.forEach(function(hr){
+                  if(hr>11){
+                      Am.push("pm")
+                  }
+                  else{
+                      Am.push("am")
+                  }
+                  if(hr>12){
+                      hour[j]=hr-12;
+                  }
+                  if(min[j]<10){
+                      min[j]="0"+min[j];
+                  }
+                  j++;
+              })
+              var i=0;
+            
+              if(hour[0]!=''){
+                   
+              
+              arr.forEach(function(dat){
+                 $div.innerHTML=$div.innerHTML+"<h1>"+hour[i]+":"+min[i]+" "+Am[i]+" "+dat+"</h1>"
+                 i=i+1;
+              })
+              }
+        </script>
+
+
+           
+    </body>
+</html>
