@@ -36,10 +36,10 @@ const auth= async(req,res,next)=>{
                     let m=now.getMinutes();
                     console.log(date)
                     const find= await List.find({variable:user.email})
-                
+                var list;
                     find.forEach(function(l){
                         if( l.date!=date){
-                            List.deleteMany({$ne:{date:date}},function(err){
+                           list= List.deleteMany({$ne:{date:date}},function(err){
                                 if(err){
                                     
                                     console.log(err)
@@ -54,8 +54,8 @@ const auth= async(req,res,next)=>{
                         }
                            else if(l.hour==h && l.min<m){
                                console.log(l.min)
-                               res.render("invalidregister")
-                                List.deleteMany({hour:h ,$lt:{min:m} },function(err){
+                              
+                                list=List.deleteMany({hour:h ,$lt:{min:m} },function(err){
                                     if(err){
                                         console.log(err)
                                     }
@@ -65,6 +65,7 @@ const auth= async(req,res,next)=>{
                                 })
                            }
                     })
+                      
                     const findlist= await List.find({variable:user.email})
                     console.log(findlist)
                     var arr=[];
