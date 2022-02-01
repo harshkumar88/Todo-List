@@ -58,23 +58,25 @@ RegisterSchema.pre("save",async function(next){
 
 const Register=mongoose.model("Register",RegisterSchema)
 
-const List= mongoose.model("todo",{
-    data:{
-        type:String,
-        
-    },
-    variable:{
-        type:String
-    },
-    hour:{
-         type:String
-    },
-    min:{
-           type:String
-    },
-    date:{
-        type:String
-    }
+
+const ListSchema=new mongoose.Schema({
+        data:{
+            type:String,
+            
+        },
+        variable:{
+            type:String
+        },
+        hour:{
+             type:String
+        },
+        min:{
+               type:String
+        },
+        date:{
+            type:String
+        }
 })
+const List= mongoose.model("todo",ListSchema)
 module.exports={
     Register,List};
