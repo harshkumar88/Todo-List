@@ -41,12 +41,15 @@ const auth= async(req,res,next)=>{
                         if( l.date!=date){
                             List.deleteMany({$ne:{date:date}},function(err){
                                 if(err){
+                                    res.render("invalidregister")
                                     console.log(err)
                                 }
                                 else{
                                     console.log("successful")
                                 }
                             })
+                            
+                            
                         }
                            else if(l.hour==h && l.min<m){
                                console.log(l.min)
