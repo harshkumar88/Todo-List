@@ -11,7 +11,9 @@ const auth= async(req,res,next)=>{
                   const token=req.cookies.jwt;
                   if(!token){
                     return res.render("invalidregister",{
-                        error:"Get login first"
+                        error:"Get login first",
+                        name1:"Login"
+
                     })
                   }
                   const verifyUser=jwt.verify(token,process.env.SECRET_KEY)

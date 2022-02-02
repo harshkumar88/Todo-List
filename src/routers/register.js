@@ -153,7 +153,8 @@ router.post("/forgot",async(req,res)=>{
     }
     catch(e){
         res.render("invalidregister",{
-            error:"404"
+            error:"404",
+            name1:"Login"
         })
     }
 
