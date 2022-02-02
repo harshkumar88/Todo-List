@@ -50,11 +50,14 @@ RegisterSchema.methods.generateAuthToken=async function(){
 //password hashing
 RegisterSchema.pre("save",async function(next){
     if(this.isModified("password")){
+        
     this.password= await bcrypt.hash(this.password,8)
+    
     }
     next()
     
 })
+
 
 const Register=mongoose.model("Register",RegisterSchema)
 

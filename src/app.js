@@ -24,13 +24,54 @@ app.get("/",(req,res)=>{
            title:"Log In"
        })
 })
+app.get("/forgot",(req,res)=>{
+    res.render('forgot',{
+        title:"forgot"
+    })
+})
+app.get("/logout",auth,async(req,res)=>{
+    try{
+        req.user.tokens =req.user.tokens.filter((stoken)=>{
+            return stoken.token !=req.token
+        })
+        res.clearCookie("jwt")
+        console.log("logout successfully")
+        await req.user.save()
+        res.render("login",{
+            title:"login",
+            name1:"Login"
+        })
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
+
+
+app.get("/logoutfromall",auth,async(req,res)=>{
+    try{
+        
+        req.user.tokens=[]
+        res.clearCookie("jwt")
+        console.log("logout successfully")
+        await req.user.save()
+        res.render("login",{
+            title:"login",
+            name1:"Login"
+        })
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
 app.get("/index",(req,res)=>{
     res.render('index',{
-        title:"Sign Up"
+        title:"Sign Up",
+        name1:"Login"
     })
 })
 app.get("/todo-list",auth,(req,res)=>{
-    
+    console.log("success")
 })
 
 

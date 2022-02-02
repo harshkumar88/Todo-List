@@ -22,7 +22,7 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form action="/login"  method="post">
+                <form action="/forgot"  method="post">
 
                   <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
@@ -32,13 +32,13 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="text" name="email1" id="email_1" class="form-control form-control-lg" required value="{{emailexist}}">  
+                    <input type="text" name="email2" id="email_1" class="form-control form-control-lg" required value="{{emailexist}}">  
                     <label class="form-label" for="email_1">Email address</label><br>
                     <span>{{user}}</span>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="text" name="password1" id="pass_1" class="form-control form-control-lg" required>
+                    <input type="text" name="password2" id="pass_1" class="form-control form-control-lg" required>
                     <label class="form-label" for="pass_1">Password</label>
                   </div>
                    <h1>{{exist}}</h1>
@@ -46,8 +46,6 @@
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                   </div>
 
-                  <a class="small text-muted" href="/forgot">Forgot password?</a>
-                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Don't have an account? <a href="/index" style="color: #393f81;">Register here</a></p>
                   <a href="#!" class="small text-muted">Terms of use.</a>
                   <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>

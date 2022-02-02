@@ -1,9 +1,13 @@
 const jwt=require("jsonwebtoken")
 const {Register,List}=require("../src/models/signup.js");
+const url=require("url")
 
 
 const auth= async(req,res,next)=>{
              try{
+                 const urlobject=url.parse(req.url,true)
+                 const path=urlobject.pathname
+                 
                   const token=req.cookies.jwt;
                   if(!token){
                     return res.render("invalidregister",{
@@ -14,6 +18,13 @@ const auth= async(req,res,next)=>{
 
                   
                   const user = await Register.findOne({_id:verifyUser._id})
+                  req.token=token
+                  req.user=user
+                  if(path=="/logout" || path=="/logoutfromall"){
+                      next()
+                      return;
+                  }
+
                   if(user){
                     var months=[
                         "Jan",
@@ -56,8 +67,9 @@ const auth= async(req,res,next)=>{
                            
                     })
                       
-                    const findlist= await List.find({variable:user.email})
-                    
+                   
+                    const findlist= await List.find({variable:user.email}).sort({hour:1,min:1})
+                    console.log(findlist)
                     var arr=[];
                     var hours=[];
                     var minutes=[];
@@ -72,7 +84,9 @@ const auth= async(req,res,next)=>{
                             data:arr,
                             title:"TOdo",
                             hour:hours,
-                            min:minutes
+                            min:minutes,
+                            name2:"Logout"
+
                         })
                     }
                   }

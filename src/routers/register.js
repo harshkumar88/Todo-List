@@ -90,14 +90,15 @@ router.post("/login",async(req,res)=>{
                 const token=await datafind.generateAuthToken()
 
                 res.cookie("jwt",token,{
-                    expires:new Date(Date.now()+60000),
+                    expires:new Date(Date.now()+100000),
                     httpOnly:true,
                     //secure:true
                 })
                 
                 
                 return res.render("login",{
-                    exist:"Successful"
+                    exist:"Successful",
+                    name2:"Logout"
                 })
              }
              return res.render("login",{
@@ -123,6 +124,42 @@ router.post("/login",async(req,res)=>{
 
 })
 
+router.post("/forgot",async(req,res)=>{
+
+    try{
+        const userdata=await Register.find({})
+        
+        const datafind=userdata.find((user)=>{
+            return user.email===req.body.email2
+        })
+   
+       if(datafind){
+           await Register.findOneAndUpdate({email:req.body.email2},{
+               $set:{
+                password:await bcrypt.hash(req.body.password2,8)
+               }
+               
+           })
+           return res.render("login",{
+               title:"login"
+           })
+       }
+       else{
+           res.render("forgot");
+       }
+        
+
+        
+    }
+    catch(e){
+        res.render("invalidregister",{
+            error:"404"
+        })
+    }
+
+})
+
+
 router.post("/todo-list",async(req,res)=>{
         try{
             const token=req.cookies.jwt;
@@ -137,9 +174,9 @@ router.post("/todo-list",async(req,res)=>{
             let h=now.getHours();
             let m=now.getMinutes();
 
-            if((h>=hour && m>min)){
+            if(h>hour ||(h==hour && m>min )){
                    return res.render("todo-list",{
-                       msg:"Please provide a time which in not in past"
+                       msg:"pls enter a time which is not in past"
                    })
             }
 
@@ -154,7 +191,7 @@ router.post("/todo-list",async(req,res)=>{
              })
 
              await list.save()
-            const findlist= await List.find({variable:user.email})
+             const findlist= await List.find({variable:user.email}).sort({hour:1,min:1})
             
             var arr=[];
             var hours=[];
