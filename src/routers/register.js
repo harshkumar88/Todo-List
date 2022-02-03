@@ -180,7 +180,7 @@ router.post("/todo-list",async(req,res)=>{
                        msg:"pls enter a time which is not in past"
                    })
             }
-
+           else{
              const list=new List({
                  data:dataadd,
                  variable:user.email,
@@ -214,7 +214,7 @@ router.post("/todo-list",async(req,res)=>{
            
             
              
-            
+        }
                          
 
         
