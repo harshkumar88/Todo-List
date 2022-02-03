@@ -174,7 +174,7 @@ router.post("/todo-list",async(req,res)=>{
             var date=now.getDate();
             let h=now.getHours();
             let m=now.getMinutes();
-
+             req.body.hour=h;
             if(h>hour){
                    return res.render("todo-list",{
                        msg:"pls enter a time which is not in past"
