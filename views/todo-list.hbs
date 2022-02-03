@@ -1,16 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"></head>
+    <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <style>
+        body{
+            background-image: url("https://wallpapercave.com/wp/wp5516588.jpg");
+        }
+        #append{
+            border-radius: 10px;
+            background-color: white;
+            padding: 18px;
+            max-width: 800px;
+            margin-left: 5px;
+            height: auto;
+            overflow-wrap: normal;
+        }
+        #append h1{
+            overflow-x:visible;
+            padding-left: 10px;
+            background-color: rgb(156, 159, 184);
+            border-radius: 20px;
+            width:500px
+        }
+        #append span{
+            
+          
+            font-weight: bolder;
+        }
+        #append div{
+            
+            width:400px
+            
+        }
+        #msg{
+            margin-top:3px;
+            background-color: red;
+        }
+
+        form input{
+            width:100px;
+            border-radius: 20px;
+            
+        }
+        form label{
+            font-weight: bold;
+        }
+
+        #work{
+            width:400px
+        }
+        #tasks{
+            width:450px;
+            background-color: white;
+        }
+    </style>
+    
+    
+    </head>
+
     <body>
         {{>header}}
         <br>
         <form action="/todo-list" method="post">
-        <input type="number" min="0" max="23" placeholder="23" name="hour" required>:
-        <input type="number" min="0" max="59" placeholder="00" name="min" required> 
-            <input type="text" name="todo" required placeholder="WORK ">
-            <button type="submit"> Add </button>
+        <label for="hour">Hour</label>
+        <input type="number" min="0" max="23" placeholder="23" name="hour" required id="hour"> :
+        <label for="min">Minutes</label>
+        <input type="number" min="0" max="59" placeholder="00" name="min" required id="min"> 
+        <br>
+        <br>
+        <label for="work">TASK</label>
+            <input type="text" name="todo" required placeholder="Enter your Task " id="work">
+            <button type="submit" class="btn btn-sm btn-primary"> Add </button>
         </form>
-        <h1 >{{msg}}</h1>
+        <h1 id="msg">{{msg}}</h1>
         <h1 id="tasks"></h1>
         <h1 id="getdata" style="display: none;">{{data}}</h1>
         <h1 id="gethour" style="display: none;">{{hour}}</h1>
@@ -73,7 +135,7 @@
                    
               
               arr.forEach(function(dat){
-                 $div.innerHTML=$div.innerHTML+"<h1>"+hour[i]+":"+min[i]+" "+Am[i]+" "+dat+"</h1>"
+                 $div.innerHTML=$div.innerHTML+"<div>"+"<span>"+hour[i]+":"+min[i]+" "+Am[i]+"</span>"+"<h1>"+dat+"</h1>"+"</div>"
                  i=i+1;
               })
               }

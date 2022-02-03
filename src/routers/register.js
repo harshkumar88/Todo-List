@@ -90,7 +90,7 @@ router.post("/login",async(req,res)=>{
                 const token=await datafind.generateAuthToken()
 
                 res.cookie("jwt",token,{
-                    expires:new Date(Date.now()+100000),
+                    expires:new Date(Date.now()+10000000),
                     httpOnly:true,
                     //secure:true
                 })
@@ -163,10 +163,7 @@ router.post("/forgot",async(req,res)=>{
             
 
 router.post("/todo-list",async(req,res)=>{
-    var now=new Date();
-            var date=now.getDate();
-            let h=now.getHours();
-            let m=now.getMinutes();
+           
         try{
             const token=req.cookies.jwt;
             const verifyUser=jwt.verify(token,process.env.SECRET_KEY)
@@ -175,14 +172,17 @@ router.post("/todo-list",async(req,res)=>{
             const hour=req.body.hour
             const min=req.body.min
 
-            
+            var now=new Date();
+            var date=now.getDate();
+            let h=now.getHours();
+            let m=now.getMinutes();
              
             if(h>hour){
                    return res.render("todo-list",{
                        msg:"pls enter a time which is not in past"
                    })
             }
-            else if(h===hour && m>min ){
+            else if(h==hour && m>min ){
                 return res.render("todo-list",{
                     msg:"pls enter a time which is not in past"
                 })
