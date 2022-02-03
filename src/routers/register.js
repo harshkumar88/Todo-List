@@ -175,10 +175,15 @@ router.post("/todo-list",async(req,res)=>{
             let h=now.getHours();
             let m=now.getMinutes();
 
-            if(h>hour ||(h==hour && m>min )){
+            if(h>hour){
                    return res.render("todo-list",{
                        msg:"pls enter a time which is not in past"
                    })
+            }
+            else if(h===hour && m>min ){
+                return res.render("todo-list",{
+                    msg:"pls enter a time which is not in past"
+                })
             }
            else{
              const list=new List({
