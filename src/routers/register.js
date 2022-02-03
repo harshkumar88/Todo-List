@@ -204,8 +204,8 @@ router.post("/todo-list",async(req,res)=>{
             var minutes=[];
             findlist.forEach(function(list){
                 arr.push(list.data)
-                hours.push(list.hour)
-                minutes.push(list.min)
+                hours.push(h)
+                minutes.push(m)
             })
             console.log(arr,hours,minutes)
             if(findlist){
