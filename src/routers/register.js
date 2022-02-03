@@ -160,8 +160,13 @@ router.post("/forgot",async(req,res)=>{
 
 })
 
+            
 
 router.post("/todo-list",async(req,res)=>{
+    var now=new Date();
+            var date=now.getDate();
+            let h=now.getHours();
+            let m=now.getMinutes();
         try{
             const token=req.cookies.jwt;
             const verifyUser=jwt.verify(token,process.env.SECRET_KEY)
@@ -170,10 +175,7 @@ router.post("/todo-list",async(req,res)=>{
             const hour=req.body.hour
             const min=req.body.min
 
-            var now=new Date();
-            var date=now.getDate();
-            let h=now.getHours();
-            let m=now.getMinutes();
+            
              
             if(h>hour){
                    return res.render("todo-list",{
@@ -204,14 +206,14 @@ router.post("/todo-list",async(req,res)=>{
             var minutes=[];
             findlist.forEach(function(list){
                 arr.push(list.data)
-                hours.push(h)
-                minutes.push(m)
+                hours.push(list.hour)
+                minutes.push(list.min)
             })
             console.log(arr,hours,minutes)
             if(findlist){
                 return res.render("todo-list",{
                     data:arr,
-                    title:`${h},${m}`,
+                    title:"Todo",
                     hour:hours,
                     min:minutes
                 })
