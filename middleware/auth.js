@@ -75,10 +75,12 @@ const auth= async(req,res,next)=>{
                     var arr=[];
                     var hours=[];
                     var minutes=[];
+                    var id=[];
                     findlist.forEach(function(list){
                         arr.push(list.data)
                         hours.push(list.hour)
                         minutes.push(list.min)
+                        id.push(list.id)
                     })
                    
                     if(findlist){
@@ -87,7 +89,8 @@ const auth= async(req,res,next)=>{
                             title:"TOdo",
                             hour:hours,
                             min:minutes,
-                            name2:"Logout"
+                            name2:"Logout",
+                            id:id
 
                         })
                     }

@@ -78,6 +78,9 @@ const ListSchema=new mongoose.Schema({
         },
         date:{
             type:String
+        },
+        id:{
+            type:String
         }
 })
 const List= mongoose.model("todo",ListSchema)

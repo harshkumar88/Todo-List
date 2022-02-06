@@ -12,7 +12,7 @@ app.set('view engine','hbs');
 const bcrypt=require("bcryptjs");
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken");
-
+const {v4 : uuidv4} = require('uuid')
 
 router.post('/index',async(req,res)=>{
         try{
@@ -184,16 +184,19 @@ router.post("/todo-list",async(req,res)=>{
             }
             else if(h==hour && m>min ){
                 return res.render("todo-list",{
-                    msg:"pls enter a time which is not in past"
+                    msg:"Not enter Past time"
                 })
             }
            else{
+            const newId = uuidv4()
              const list=new List({
                  data:dataadd,
                  variable:user.email,
                  hour:hour,
                  min:min,
-                 date:date
+                 date:date,
+                 id:newId
+
 
                  
              })
@@ -204,10 +207,12 @@ router.post("/todo-list",async(req,res)=>{
             var arr=[];
             var hours=[];
             var minutes=[];
+            var id=[];
             findlist.forEach(function(list){
                 arr.push(list.data)
                 hours.push(list.hour)
                 minutes.push(list.min)
+                id.push(list.id)
             })
             console.log(arr,hours,minutes)
             if(findlist){
@@ -215,7 +220,8 @@ router.post("/todo-list",async(req,res)=>{
                     data:arr,
                     title:"Todo",
                     hour:hours,
-                    min:minutes
+                    min:minutes,
+                    id:id
                 })
             }
            
@@ -229,6 +235,55 @@ router.post("/todo-list",async(req,res)=>{
         catch(e){
              return res.send("error")
         }
+})
+
+
+router.post("/delete",async(req,res)=>{
+    try{
+        const i=req.body.checkbox;
+        console.log(i)
+        List.findOneAndDelete({id:i},function(err,docs){
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Deleted User : ", docs);
+            }
+        })
+
+        const token=req.cookies.jwt;
+        const verifyUser=jwt.verify(token,process.env.SECRET_KEY)
+        const user = await Register.findOne({_id:verifyUser._id})
+        const findlist= await List.find({variable:user.email}).sort({hour:1,min:1})
+            
+        var arr=[];
+        var hours=[];
+        var minutes=[];
+        var id=[];
+        findlist.forEach(function(list){
+            arr.push(list.data)
+            hours.push(list.hour)
+            minutes.push(list.min)
+            id.push(list.id)
+        })
+        console.log(arr,hours,minutes)
+        if(findlist){
+            return res.render("todo-list",{
+                data:arr,
+                title:"Todo",
+                hour:hours,
+                min:minutes,
+                id:id
+            })
+        }
+       
+        
+         
+    }
+                     
+    catch(e){
+
+    }
 })
 
 module.exports=router;
