@@ -26,7 +26,8 @@ app.get("/",(req,res)=>{
 })
 app.get("/forgot",(req,res)=>{
     res.render('forgot',{
-        title:"forgot"
+        title:"forgot",
+        name1:"Login"
     })
 })
 app.get("/logout",auth,async(req,res)=>{
@@ -48,7 +49,7 @@ app.get("/logout",auth,async(req,res)=>{
 })
 
 
-app.get("/logoutfromall",auth,async(req,res)=>{
+/*app.get("/logoutfromall",auth,async(req,res)=>{
     try{
         
         req.user.tokens=[]
@@ -64,6 +65,7 @@ app.get("/logoutfromall",auth,async(req,res)=>{
         res.status(500).send(error)
     }
 })
+*/
 app.get("/index",(req,res)=>{
     res.render('index',{
         title:"Sign Up",

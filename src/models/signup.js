@@ -11,19 +11,15 @@ const RegisterSchema=new mongoose.Schema({
         required:true,
         trim:true,
         unique:true,
-        lowercase:true,
-        validate(value){
-            if(!validator.isEmail(value)){
-                throw new Error("Must input a valid email")
-            }
-        }
+        lowercase:true
+       
 
     },
     password:{
         type:String,
         required:true,
-        trim:true,
-        minlength:7,
+        trim:true
+       
     },
     tokens:[{
         token:{

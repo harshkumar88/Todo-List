@@ -75,6 +75,7 @@ router.post('/index',async(req,res)=>{
 router.post("/login",async(req,res)=>{
 
      try{
+        
          const userdata=await Register.find({})
          
          const datafind=userdata.find((user)=>{
@@ -145,7 +146,9 @@ router.post("/forgot",async(req,res)=>{
            })
        }
        else{
-           res.render("forgot");
+           res.render("forgot",{
+               exist:"Email not Exist"
+           });
        }
         
 
@@ -233,7 +236,10 @@ router.post("/todo-list",async(req,res)=>{
         
         }
         catch(e){
-             return res.send("error")
+            return res.render("invalidregister",{
+                error:"404",
+                
+            })
         }
 })
 
@@ -282,7 +288,10 @@ router.post("/delete",async(req,res)=>{
     }
                      
     catch(e){
-
+        return res.render("invalidregister",{
+            error:"404",
+            
+        })
     }
 })
 

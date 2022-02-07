@@ -11,8 +11,9 @@ const auth= async(req,res,next)=>{
                   const token=req.cookies.jwt;
                   if(!token){
                     return res.render("invalidregister",{
-                        error:"Get login first",
-                        name1:"Login"
+                        error:"404",
+                        name1:"Login",
+                        err:"Get Login First"
 
                     })
                   }
@@ -98,7 +99,10 @@ const auth= async(req,res,next)=>{
                   next()
              } 
              catch(e){
-                 res.status(401).send(e)
+                return res.render("invalidregister",{
+                    error:"404",
+                    
+                })
              }
 }
 module.exports=auth;

@@ -2,9 +2,32 @@
 <html>
     <head>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+    
+     footer div{
+             border: 2px solid black;
+           }
+
+           body{
+               min-height: 100vh;
+               display: flex;
+               flex-direction: column;
+           }
+           #error{
+width: fit-content;
+         margin: auto;
+         margin-top: 10%;
+         flex-grow: 1;
+           }
+ </style>
     </head>
     <body>
         {{>header}}
-        <h1>{{error}}</h1>
+        <div id="error">
+        <h1 style="color: red;font-size:170px">{{error}}</h1>
+        <p style="font-weight: bold;font-size:30px">{{err}}</p>
+        </div>
+         {{>footer}}
     </body>
 </html>
