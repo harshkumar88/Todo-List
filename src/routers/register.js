@@ -220,6 +220,7 @@ router.post("/todo-list",async(req,res)=>{
                 return res.render("todo-list",{
                     data:arr,
                     title:"Todo",
+                    name2:"logout",
                     hour:hours,
                     min:minutes,
                     id:id
