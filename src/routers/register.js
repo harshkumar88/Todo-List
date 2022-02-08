@@ -13,6 +13,7 @@ const bcrypt=require("bcryptjs");
 const cookieParser=require("cookie-parser")
 const jwt=require("jsonwebtoken");
 const {v4 : uuidv4} = require('uuid')
+const originalUrl=require("url")
 
 router.post('/index',async(req,res)=>{
         try{
@@ -96,11 +97,8 @@ router.post("/login",async(req,res)=>{
                     //secure:true
                 })
                 
+                return res.redirect('/todo-list')
                 
-                return res.render("login",{
-                    exist:"Successful",
-                    name2:"Logout"
-                })
              }
              return res.render("login",{
                  exist:"No user found",

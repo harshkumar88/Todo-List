@@ -7,9 +7,15 @@ const auth= async(req,res,next)=>{
              try{
                  const urlobject=url.parse(req.url,true)
                  const path=urlobject.pathname
+                   
                  
                   const token=req.cookies.jwt;
                   if(!token){
+                      if(path=='/'){
+                        return res.render('login',{
+                            title:"Log In"
+                        })
+                      }
                     return res.render("invalidregister",{
                         error:"404",
                         name1:"Login",
@@ -23,7 +29,7 @@ const auth= async(req,res,next)=>{
                   const user = await Register.findOne({_id:verifyUser._id})
                   req.token=token
                   req.user=user
-                  if(path=="/logout" || path=="/logoutfromall"){
+                  if(path=="/logout" || path=="/logoutfromall" || path=='/'){
                       next()
                       return;
                   }

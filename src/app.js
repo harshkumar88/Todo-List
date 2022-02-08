@@ -19,10 +19,25 @@ app.use(registerRouter)
 
 
 
-app.get("/",(req,res)=>{
-       res.render('login',{
-           title:"Log In"
-       })
+app.get("/",auth,(req,res)=>{
+    try{
+        req.user.tokens =req.user.tokens.find((stoken)=>{
+            return stoken.token ==req.token
+        })
+        
+        if(req.user.tokens){
+            res.redirect("/todo-list")
+        }
+        else{
+        res.render('login',{
+            title:"Log In"
+        })
+    }
+    }
+    catch(e){
+console.log(e)
+    }
+       
 })
 app.get("/forgot",(req,res)=>{
     res.render('forgot',{
