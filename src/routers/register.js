@@ -22,10 +22,18 @@ router.post('/index',async(req,res)=>{
             const finduser=userdata.find((user)=>{
                 return user.email===req.body.email
             })
+            const findpin=userdata.find((user)=>{
+                return user.email===req.body.security
+            })
             if(finduser){
                 return res.render("index",{
                     user:"EMAIL ALready exist",
                     emailval:finduser.email
+                })
+            }
+            else if(findpin){
+                return res.render("index",{
+                    pin:"PIN already exist"
                 })
             }
             else{
@@ -41,22 +49,16 @@ router.post('/index',async(req,res)=>{
                
               const register=new Register({
                   email:req.body.email,
-               password: req.body.password
+               password: req.body.password,
+               security:req.body.security
             }
                
                )
-               
-               const token=await register.generateAuthToken()
-                 
-               res.cookie("jwt",token,{
-                   expires:new Date(Date.now()+30000),
-                   httpOnly:true
-               })
-
+                             
 
               const registered=await register.save();
 
-               res.render("index")
+              return res.redirect("/")
               
 
         }
@@ -131,9 +133,13 @@ router.post("/forgot",async(req,res)=>{
         const datafind=userdata.find((user)=>{
             return user.email===req.body.email2
         })
+        const pin=userdata.find((user)=>{
+            return user.security===req.body.security1
+        })
    
-       if(datafind){
-           await Register.findOneAndUpdate({email:req.body.email2},{
+   
+       if(datafind && pin){
+           await Register.findOneAndUpdate({security:req.body.security1},{
                $set:{
                 password:await bcrypt.hash(req.body.password2,8)
                }
@@ -145,7 +151,7 @@ router.post("/forgot",async(req,res)=>{
        }
        else{
            res.render("forgot",{
-               exist:"Email not Exist"
+               exist:"User Not Exist"
            });
        }
         

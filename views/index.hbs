@@ -39,8 +39,11 @@
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="text" name="password" id="pass_1" class="form-control form-control-lg" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$" placeholder=" eg.Pzddkzd@7  (min 8 chars)">
+                    <input type="password" name="password" id="pass_1" class="form-control form-control-lg" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$" placeholder=" eg.Pzddkzd@7  (min 8 chars)">
                     <label class="form-label" for="pass_1">Password</label>
+                    <br>
+                    <input type="password" name="security" required placeholder="security key">
+                    <p>{{pin}}</p>
                   </div>
 
                   <div class="pt-1 mb-4">

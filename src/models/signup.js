@@ -21,6 +21,10 @@ const RegisterSchema=new mongoose.Schema({
         trim:true
        
     },
+    security:{
+        type:String,
+        unique:true
+    },
     tokens:[{
         token:{
             type:String,
