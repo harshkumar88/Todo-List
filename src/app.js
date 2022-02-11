@@ -30,7 +30,8 @@ app.get("/",auth,(req,res)=>{
         }
         else{
         res.render('login',{
-            title:"Log In"
+            title:"Log In",
+            name3:"Sign Up"
         })
     }
     }

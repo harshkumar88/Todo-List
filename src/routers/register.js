@@ -104,13 +104,15 @@ router.post("/login",async(req,res)=>{
              }
              return res.render("login",{
                  exist:"No user found",
-                 emailexist:req.body.email1
+                 emailexist:req.body.email1,
+                 name3:"Sign Up"
              })
          }
 
          return res.render("login",{
             exist:"No user found",
-            emailexist:req.body.email1
+            emailexist:req.body.email1,
+            name3:"Sign Up"
         })
 
        
@@ -133,12 +135,10 @@ router.post("/forgot",async(req,res)=>{
         const datafind=userdata.find((user)=>{
             return user.email===req.body.email2
         })
-        const pin=userdata.find((user)=>{
-            return user.security===req.body.security1
-        })
+        
    
    
-       if(datafind && pin){
+       if(datafind && datafind.security==req.body.security1){
            await Register.findOneAndUpdate({security:req.body.security1},{
                $set:{
                 password:await bcrypt.hash(req.body.password2,8)
@@ -146,12 +146,14 @@ router.post("/forgot",async(req,res)=>{
                
            })
            return res.render("login",{
-               title:"login"
+               title:"login",
+               name3:"Sign Up"
            })
        }
        else{
            res.render("forgot",{
-               exist:"User Not Exist"
+               exist:"User Not Exist",
+               name3:"Sign Up"
            });
        }
         

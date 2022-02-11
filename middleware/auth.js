@@ -13,7 +13,8 @@ const auth= async(req,res,next)=>{
                   if(!token){
                       if(path=='/'){
                         return res.render('login',{
-                            title:"Log In"
+                            title:"Log In",
+                            name3:"Sign Up"
                         })
                       }
                     return res.render("invalidregister",{
