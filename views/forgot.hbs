@@ -12,15 +12,15 @@
     <body>
         {{>header}}
  
-  <section class="vh-100" style="background-color: #9A616D;">
-  <div class="container py-5 h-100" style="margin: auto;" id="grow">
+  <section class="vh-30" style="background-color: #9A616D;">
+  <div class="container py-4 h-70"  id="grow">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-10 ">
-        <div   style="border-radius: 1rem; margin-top:-27px;margin-left:20%">
+        <div   style="border-radius: 1rem;">
           <div class="row g-0">
             
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+            <div class="col-md-6 col-lg-7 d-flex align-items-center" style="margin: auto;">
+              <div class=" card card-body p-4 p-lg-5 text-black" >
 
                 <form action="/forgot"  method="post">
 
@@ -32,18 +32,24 @@
                   <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
 
                   <div class="form-outline mb-4">
-                    <input type="text" name="email2" id="email_1" class="form-control form-control-lg" required value="{{emailexist}}">  
+                    <input type="text" name="email2" id="email_1" class="form-control form-control-lg" required value="{{emailexist}}" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">  
                     <label class="form-label" for="email_1">Email address</label><br>
                     <span style="color:red">{{user}}</span>
                   </div>
 
-                  <div class="form-outline mb-4">
-                    <input type="password" name="password2" id="pass_1" class="form-control form-control-lg" required>
-                    <label class="form-label" for="pass_1">Password</label>
-                    <br>
-                    <input type="password" name="security1" required placeholder="security key">
+                  <div class="form-outline mb-4" >
+                    <div>
+                    <input type="password" name="security1" id="sec" required class="form-control form-control-lg" >
+                    <label class="form-label" for="sec">Security Pin</label>
+                    </div>
+                     <h1 >{{exist}}</h1>
+                    <div>
+                    <input type="password" name="password2" id="pass_1" class="form-control form-control-lg" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}$">
+                    <label class="form-label" for="pass_1">New Password</label>
+                    </div>
+                    
                   </div>
-                   <h1 style="color:red">{{exist}}</h1>
+                  
                   <div class="pt-1 mb-4">
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Submit</button>
                   </div>
