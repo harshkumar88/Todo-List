@@ -1,7 +1,7 @@
 const jwt=require("jsonwebtoken")
 const {Register,List}=require("../src/models/signup.js");
 const url=require("url")
-
+var nodemailer = require('nodemailer');
 
 const auth= async(req,res,next)=>{
              try{
