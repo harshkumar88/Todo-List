@@ -143,9 +143,12 @@ const mail= async(req,res,next)=>{
             if(tasks.length!=0){
                 
                 for(var i=0;i<tasks.length;i++){
-                    if(hour[i]==h && min[i]==m && notarray){
+                    if(hour[i]==h && min[i]==m){
                         sendmail(user,"Your pending Work",tasks[i])
                         console.log("fine",h,m)
+                        res.render("invalidregister",{
+                            err:"user"
+                        })
             
                     }
                 }
