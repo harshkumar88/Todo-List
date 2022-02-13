@@ -117,7 +117,7 @@ const auth= async(req,res,next)=>{
 var notarray=[];
 const mail= async(req,res,next)=>{
       try{
-          console.log("mail")
+            console.log("mail")
              var now=new Date();
             var date=now.getDate();
             let h=now.getHours();
@@ -132,10 +132,7 @@ const mail= async(req,res,next)=>{
            useremail.push(user.email)
       })
 
-      var now=new Date();
-        var date=now.getDate();
-        let h=now.getHours();
-        let m=now.getMinutes();
+      
 
       useremail.forEach(async(user)=>{
           var tasks=[];
