@@ -118,9 +118,13 @@ var notarray=[];
 const mail= async(req,res,next)=>{
       try{
           console.log("mail")
-          var dt = dateTime.create();
-          var formatted = dt.format('H:M');
-         return  sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work",formatted)
+             var now=new Date();
+            var date=now.getDate();
+            let h=now.getHours();
+            let m=now.getMinutes();
+            h=h+5;
+            m=m+30;
+         return  sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work","hour"+h+" "+"min"+m)
         
       const users=await Register.find({})
       var useremail=[];
