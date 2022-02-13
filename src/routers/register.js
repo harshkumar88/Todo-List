@@ -294,7 +294,8 @@ router.post("/delete",async(req,res)=>{
                 title:"Todo",
                 hour:hours,
                 min:minutes,
-                id:id
+                id:id,
+                name2:"Logout"
             })
         }
        
