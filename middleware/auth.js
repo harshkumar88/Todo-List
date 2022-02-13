@@ -128,7 +128,7 @@ const mail= async(req,res,next)=>{
                 m-=60;
                 h+=1;
             }
-         return  sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work","hour"+h+" "+"min"+m)
+        
         
       const users=await Register.find({})
       var useremail=[];
