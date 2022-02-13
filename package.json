@@ -16,6 +16,7 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "fcm-node": "^1.6.1",
     "hbs": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",

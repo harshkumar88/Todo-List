@@ -9,7 +9,7 @@ const hbs=require('hbs')
 require("./db/mongoose")
 app.set('view engine','hbs');
 const cookieParser=require("cookie-parser")
-const auth=require('../middleware/auth')
+const {auth,mail}=require('../middleware/auth')
 const partialsPath=path.join(__dirname,'./partials')
 //app.use(express.static(publicdirectoryPath))
 hbs.registerPartials(partialsPath);
@@ -17,8 +17,9 @@ hbs.registerPartials(partialsPath);
 app.use(cookieParser())
 app.use(registerRouter)
 
-
-
+setInterval(()=>{
+    mail();
+},60000)
 app.get("/",auth,(req,res)=>{
     try{
         req.user.tokens =req.user.tokens.find((stoken)=>{

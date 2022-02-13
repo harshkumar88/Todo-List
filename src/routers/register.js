@@ -15,6 +15,7 @@ const jwt=require("jsonwebtoken");
 const {v4 : uuidv4} = require('uuid')
 const originalUrl=require("url")
 const fetch=require("node-fetch")
+
 const sendmail=require("./send.js")
 
 router.post('/index',async(req,res)=>{
@@ -49,6 +50,9 @@ router.post('/index',async(req,res)=>{
             
               
                
+            
+                sendmail(req.body.email,"Register","you are Succesfully registered ")
+            
               const register=new Register({
                   email:req.body.email,
                password: req.body.password,
@@ -100,17 +104,19 @@ router.post("/login",async(req,res)=>{
                     httpOnly:true,
                     //secure:true
                 })
+                sendmail(req.body.email1,"Login","you are Succesfully Login ")
                 
                 return res.redirect('/todo-list')
                 
              }
+             sendmail(req.body.email1,"Login","Someone is trying to access your ")
              return res.render("login",{
                  exist:"No user found",
                  emailexist:req.body.email1,
                  name3:"Sign Up"
              })
          }
-
+         sendmail(req.body.email1,"Login","Someone is trying to access your ")
          return res.render("login",{
             exist:"No user found",
             emailexist:req.body.email1,
@@ -302,47 +308,6 @@ router.post("/delete",async(req,res)=>{
             
         })
     }
-})
-
-var fcm_tokens=[];
-router.post('/sendToAll',async(req,res)=>{
-    console.log("hier")
-    const token=await datafind.generateAuthToken()
-
-   var notification={
-       'title':'TITLE OF NOTIFICATION',
-       'text':'SUBTITLE'
-   }
-
-   
-   fcm_tokens.push(token);
-
-   var notification_body={
-       'notification':notification,
-       'registration_ids':fcm_tokens
-   }
-
-
-    fetch('https://fcm.googleapis.com/fcm/send',{
-        'method':'POST',
-        'headers':{
-            'Authorization':'Key='+'AAAAmRFrm_o:APA91bE-NX4kxhhzuaPKgRu5j5cfqzSb_PPtC8oQKam5vM-Mxh4GdrHs-j5BOVTHUNdMESMYs5evmngtGWNXnBt2wJ57dGmYoBLUZ2Cv8rRSQNKJemfCaB_jB73fh4r4FyXunO2pHRSh',
-            'Content-Type':'application/json'
-
-        },
-
-        'body':JSON.stringify(notification_body)
-    }).then(()=>{
-        console.log('send')
-        res.status(200).send("NOTIFICATION send")
-    }).catch((e)=>{
-           console.log(e)
-           res.status(400).send("Wrong")
-    })
-
-
-
-
 })
 
 
