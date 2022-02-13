@@ -146,9 +146,7 @@ const mail= async(req,res,next)=>{
                     if(hour[i]==h && min[i]==m){
                         sendmail(user,"Your pending Work",tasks[i])
                         console.log("fine",h,m)
-                        res.render("invalidregister",{
-                            err:"user"
-                        })
+                        
             
                     }
                 }
@@ -157,7 +155,7 @@ const mail= async(req,res,next)=>{
             }
             
         
-        
+           
           
       })
       
