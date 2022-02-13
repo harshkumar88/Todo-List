@@ -19,7 +19,7 @@ app.use(registerRouter)
 
 setTimeout(()=>{
     mail()
-})
+},2000)
 
 app.get("/",auth,(req,res)=>{
     try{
