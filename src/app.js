@@ -17,7 +17,7 @@ hbs.registerPartials(partialsPath);
 app.use(cookieParser())
 app.use(registerRouter)
 
-setTimeout(()=>{
+setInterval(()=>{
     mail()
 },2000)
 
