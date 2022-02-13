@@ -3,6 +3,7 @@ const {Register,List}=require("../src/models/signup.js");
 const url=require("url")
 var nodemailer = require('nodemailer');
 const sendmail=require("../src/routers/send.js")
+const dateTime = require('node-datetime');
 const auth= async(req,res,next)=>{
              try{
                  const urlobject=url.parse(req.url,true)
@@ -117,19 +118,21 @@ var notarray=[];
 const mail= async(req,res,next)=>{
       try{
           console.log("mail")
-         
+          var dt = dateTime.create();
+          var formatted = dt.format('H:M');
+         return  sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work",formatted)
         
       const users=await Register.find({})
       var useremail=[];
       users.forEach((user)=>{
            useremail.push(user.email)
       })
-    
+
       var now=new Date();
         var date=now.getDate();
         let h=now.getHours();
         let m=now.getMinutes();
-     sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work","hour"+h+" min"+m)
+
       useremail.forEach(async(user)=>{
           var tasks=[];
           var hour=[];
@@ -144,7 +147,6 @@ const mail= async(req,res,next)=>{
             if(tasks.length!=0){
                 
                 for(var i=0;i<tasks.length;i++){
-                    
                     if(hour[i]==h && min[i]==m){
                         sendmail(user,"Your pending Work",tasks[i])
                         console.log("fine",h,m)
