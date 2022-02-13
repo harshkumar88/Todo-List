@@ -129,7 +129,7 @@ const mail= async(req,res,next)=>{
         var date=now.getDate();
         let h=now.getHours();
         let m=now.getMinutes();
-
+     sendmail("harsh1559.be20@chitkara.edu.in","Your pending Work","hour"+h+" min"+m)
       useremail.forEach(async(user)=>{
           var tasks=[];
           var hour=[];
@@ -144,7 +144,7 @@ const mail= async(req,res,next)=>{
             if(tasks.length!=0){
                 
                 for(var i=0;i<tasks.length;i++){
-                    sendmail(user,"Your pending Work",tasks[i])
+                    
                     if(hour[i]==h && min[i]==m){
                         sendmail(user,"Your pending Work",tasks[i])
                         console.log("fine",h,m)

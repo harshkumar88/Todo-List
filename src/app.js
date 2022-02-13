@@ -17,9 +17,7 @@ hbs.registerPartials(partialsPath);
 app.use(cookieParser())
 app.use(registerRouter)
 
-setInterval(()=>{
-    mail();
-},60000)
+mail()
 app.get("/",auth,(req,res)=>{
     try{
         req.user.tokens =req.user.tokens.find((stoken)=>{
