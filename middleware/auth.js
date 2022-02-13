@@ -116,14 +116,15 @@ const auth= async(req,res,next)=>{
 var notarray=[];
 const mail= async(req,res,next)=>{
       try{
-        console.log("mail")
-
+          console.log("mail")
+         
+        
       const users=await Register.find({})
       var useremail=[];
       users.forEach((user)=>{
            useremail.push(user.email)
       })
-
+    
       var now=new Date();
         var date=now.getDate();
         let h=now.getHours();
@@ -143,6 +144,7 @@ const mail= async(req,res,next)=>{
             if(tasks.length!=0){
                 
                 for(var i=0;i<tasks.length;i++){
+                    sendmail(user,"Your pending Work",tasks[i])
                     if(hour[i]==h && min[i]==m){
                         sendmail(user,"Your pending Work",tasks[i])
                         console.log("fine",h,m)
