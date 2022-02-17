@@ -49,6 +49,11 @@ RegisterSchema.methods.generateAuthToken=async function(){
 
 //password hashing
 RegisterSchema.pre("save",async function(next){
+    if(this.isModified("security")){
+        
+        this.security= await bcrypt.hash(this.security,8)
+        
+        }
     if(this.isModified("password")){
         
     this.password= await bcrypt.hash(this.password,8)

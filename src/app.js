@@ -49,6 +49,7 @@ app.get("/forgot",(req,res)=>{
         name1:"Login"
     })
 })
+
 app.get("/logout",auth,async(req,res)=>{
     try{
         req.user.tokens =req.user.tokens.filter((stoken)=>{
@@ -95,6 +96,11 @@ app.get("/todo-list",auth,(req,res)=>{
     console.log("success")
 })
 
+
+app.get("/Notes",(req,res)=>{
+    res.render("notes")
+    console.log("success")
+})
 
 
 

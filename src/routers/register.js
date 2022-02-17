@@ -145,8 +145,8 @@ router.post("/forgot",async(req,res)=>{
         })
         
    
-   
-       if(datafind && datafind.security==req.body.security1){
+        const isMatch= await bcrypt.compare(req.body.security1,datafind.security)
+       if(datafind && isMatch){
            await Register.findOneAndUpdate({security:req.body.security1},{
                $set:{
                 password:await bcrypt.hash(req.body.password2,8)
