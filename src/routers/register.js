@@ -3,7 +3,7 @@ const app=express()
 const mongoose=require('mongoose');
 const validator=require("validator")
 const router=new express.Router()
-const {Register,List}=require("../models/signup.js")
+const {Register,List,Notes}=require("../models/signup.js")
 const hbs=require('hbs')
 const { on } = require("../models/signup.js")
 router.use(express.json())
@@ -16,7 +16,8 @@ const {v4 : uuidv4} = require('uuid')
 const originalUrl=require("url")
 const fetch=require("node-fetch")
 
-const sendmail=require("./send.js")
+const sendmail=require("./send.js");
+const { nextTick } = require("process");
 
 router.post('/index',async(req,res)=>{
         try{
@@ -312,5 +313,56 @@ router.post("/delete",async(req,res)=>{
 })
 
 
+
+router.post("/notes",async(req,res)=>{
+
+    try{
+        console.log(req.body.sub)
+        
+        const token=req.cookies.jwt;
+        const verifyUser=jwt.verify(token,process.env.SECRET_KEY)
+        const user = await Register.findOne({_id:verifyUser._id})
+
+        console.log(user.email)
+     const you=Notes.findOneAndDelete({mail:user.email,subject:req.body.sub},function(err,docs){
+        if (err){
+            console.log(err)
+        }
+        else{
+            console.log("Deleted User : ", docs);
+        }
+     });
+     if(req.body.sub!=''){
+        
+    const notes=new Notes({
+         mail:user.email,
+         notes:req.body.text,
+         subject:req.body.sub
+     })
+     await notes.save();
+    }
+        
+     const note=await Notes.find({mail:user.email})
+   
+      var arr=[];
+      var sub=[];
+     note.forEach((n)=>{
+        arr.push(n.notes)
+        sub.push(n.subject)
+     })
+     console.log(arr,sub)
+     res.render("notes",{
+        title:"Notes",
+        data:arr,
+        subject:sub,
+        name2:"Logout"
+    })
+     
+ 
+    }
+    catch(e){
+   console.log(e)
+    }
+})
 
 module.exports=router;

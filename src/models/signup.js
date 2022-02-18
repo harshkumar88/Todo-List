@@ -87,7 +87,23 @@ const ListSchema=new mongoose.Schema({
         id:{
             type:String
         }
+       
 })
 const List= mongoose.model("todo",ListSchema)
+
+
+const NotesSchema=new mongoose.Schema({
+   mail:{
+        type:String
+    },
+    notes:{
+        type:String
+    },
+    subject:{
+        type:String
+    }
+
+})
+const Notes= mongoose.model("notes",NotesSchema)
 module.exports={
-    Register,List};
+    Register,List,Notes};

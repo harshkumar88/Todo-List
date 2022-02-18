@@ -9,7 +9,7 @@ const hbs=require('hbs')
 require("./db/mongoose")
 app.set('view engine','hbs');
 const cookieParser=require("cookie-parser")
-const {auth,mail}=require('../middleware/auth')
+const {auth,mail,change}=require('../middleware/auth')
 const partialsPath=path.join(__dirname,'./partials')
 //app.use(express.static(publicdirectoryPath))
 hbs.registerPartials(partialsPath);
@@ -97,8 +97,8 @@ app.get("/todo-list",auth,(req,res)=>{
 })
 
 
-app.get("/Notes",(req,res)=>{
-    res.render("notes")
+app.get("/notes",change,(req,res)=>{
+   
     console.log("success")
 })
 

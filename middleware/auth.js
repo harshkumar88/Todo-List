@@ -1,5 +1,5 @@
 const jwt=require("jsonwebtoken")
-const {Register,List}=require("../src/models/signup.js");
+const {Register,List,Notes}=require("../src/models/signup.js");
 const url=require("url")
 var nodemailer = require('nodemailer');
 const sendmail=require("../src/routers/send.js")
@@ -175,4 +175,64 @@ const mail= async(req,res,next)=>{
       }
 }
 
-module.exports={auth,mail};
+const change=async(req,res,next)=>{
+        
+    try{
+      
+        const urlobject=url.parse(req.url,true)
+        const path=urlobject.pathname
+          
+        
+         const token=req.cookies.jwt;
+         if(!token){
+             if(path=='/'){
+               return res.render('login',{
+                   title:"Log In",
+                   name3:"Sign Up"
+               })
+             }
+           return res.render("invalidregister",{
+               error:"404",
+               name1:"Login",
+               err:"Get Login First"
+
+           })
+         }
+         const verifyUser=jwt.verify(token,process.env.SECRET_KEY)
+
+         
+         const user = await Register.findOne({_id:verifyUser._id})
+         req.token=token
+         req.user=user
+         if(path=="/logout" || path=="/logoutfromall" || path=='/'){
+             next()
+             return;
+         }
+
+         
+  
+         
+         
+         const note=await Notes.find({mail:user.email})
+   
+      var arr=[];
+      var sub=[];
+     note.forEach((n)=>{
+        arr.push(n.notes)
+        sub.push(n.subject)
+     })
+     console.log(arr,sub)
+     res.render("notes",{
+         title:"Notes",
+         data:arr,
+         subject:sub,
+         name2:"Logout"
+     })
+     next();
+    }
+    catch(e){
+         
+    }
+}
+
+module.exports={auth,mail,change};

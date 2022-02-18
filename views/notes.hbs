@@ -8,38 +8,33 @@
            background-color: rgb(171, 137, 202);
        }
        #append{
+       
            background-color: white;
-           width: fit-content;
+           width: 70vw;
            margin: auto;
            padding: 10px;
-            
+            height: 70vh;
         max-height:70vh;
         line-height: 1.5;
   box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.479);
  
        
 
        }
+       #b,#a{
+         
+         color: whitesmoke;
+          background-color: rgba(0, 0, 0, 0.479);
+         width:100%;
+         height: 100%;
+         
+       }
+       #a{
+         font-size: 3vmin;
+       }
        
-       #tasks{
-           color:blueviolet
-       }
-       #append div h4{
-           display: inline-block;
-       }
-       #append div input{
-           margin-right: 5%;
-       }
-       #show input{
-           background: transparent;
-  border: none;
-  border-bottom: 1px solid #000000;
-       }
-       #show{
-           display: none;
-           margin-top:5px;
-           
-       }
+      
        .container {
   background-color: #fdfdfd;
   height: 100%;
@@ -92,48 +87,153 @@ width: fit-content;
          margin-top: 5%;
          flex-grow: 1;
            }
+#make{
+  margin: auto;
+  margin-top: 3px;
+  width: fit-content;
+}
+#make h1{
+  font-size:6vmax;
+  font-size: 7vmin;
+}
+
+#subject{
+  margin:auto;
+  width:150px;
+  margin-bottom: 5px;
+  
+}
+#cn{
+
+ display: flex;
+ flex-direction: row;
+  margin-bottom: 5px;
+  justify-content: space-around;
+  border:2px solid black ;
+  background-color: blueviolet;
+ 
+}
+
+#add{
+  width:fit-content;
+  margin: auto;
+  
+}
+#toggle{
+  display: none;
+}
+
+
     </style>
     
     
     </head>
 
-    <body>
         {{>header}}
-        <br>
-        
-        
-        <h1 id="getdata" style="display: none;">{{data}}</h1>
-        <h1 id="gethour" style="display: none;">{{hour}}</h1>
-        <h1 id="getmin" style="display: none;">{{min}}</h1>
-         <h1 id="getid" style="display: none;">{{id}}</h1>
-         <div id="append" class="container custom-scrollbar" id="error">
-        <img src="https://cdn3.iconfinder.com/data/icons/medical-2-16/64/181-512.png">
-        <h1 id="tasks" style="display: inline-block;"></h1>
-        <p id="msg" style="color:Red" >{{msg}}</p>
-         <form action="/delete" method="post">
-         <div id="app">
-
-         </div>
-         </form>
-         
-        <form action="/todo-list" method="post" id="show">
-        <label for="hour">Hour</label>
-        <input type="number" min="0" max="23" placeholder="23" name="hour" required id="hour"> :
-        <label for="min">Minutes</label>
-        <input type="number" min="0" max="59" placeholder="00" name="min" required id="min"> 
-        <br>
-        <br>
-        <label for="work">TASK</label>
-            <input type="text" name="todo" required placeholder="Enter your Task " id="work">
-            <button type="submit" class="btn btn-md " style="border-radius: 50%;background-color:blueviolet;font-weight:bold" id="again"> + </button>
+        <h1 id="note" style="display: none;">{{data}}</h1>
+        <h1 id="subject" style="display: none;">{{subject}}</h1>
+        <div id="make"><h1 > <img src="https://cdn3.iconfinder.com/data/icons/medical-2-16/64/181-512.png" style="margin-top: 8px;"> Make your Notes</h1></div>
+       <div id="add"><input type="button" value="ADD Your Subject" class="btn btn-primary" id="your"><br><br><div id="toggle"><input type="text" id="text"><input type="button" value="+"  id="input" class="btn btn-primary btn-sm" style="margin-top: -3px;"></div><br></div>
+         <div id="cn"><button class="btn btn-primary btn-lg" id="btn1">CSA</button><button class="btn btn-primary btn-lg"id="btn2">CN</button><button class="btn btn-lg  btn-primary"id="btn3">OS</button></div>
+         <div id="append" id="error">
+        <form id="b" action="/notes" method="post" >
+        <textarea  id="a"  class="container custom-scrollbar" onchange='this.form.submit()' name="text"></textarea>
+        <input type="text" name="sub" id="name" style="display: none;" value="CSA">
         </form>
-        <button type="button" id="hide" class="btn btn-md" style="background-color:blueviolet;font-weight:bold">Add your Task</button>
          </div>
+
         <h1>{{value}}</h1>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
+<script>
+  const data=document.getElementById("note").innerHTML;
+  const sub=document.getElementById("subject").innerHTML;
+  var arr=data.split(",")
+  var subject=sub.split(",")
+  document.getElementById("a").value="Get Your Notes By clicking on Particular subject";
 
+
+ $(document).ready(function(){
+   $("#your").click(function(){
+     $("#toggle").show();
+   })
+   $("#input").click(function(){
+     $("#toggle").hide();
+   })
+         $("#cn").html("")
+
+          for(var i=0;i<subject.length;i++){
+            console.log(subject[i])
+            $("#cn").append("<button class='btn btn-primary' >"+subject[i]+"</button>")
+          }
+  } )
+
+  
+   $(document).ready(function(){
+     $("#input").click(function(){
+    var input=$("#text").val()
+    if(input!=''){
+   $("#cn").append("<button class='btn btn-primary' >"+input+"</button>")}
+     $("#cn button").click(function(e){
+      
+      $("button").css("background-color","blue")
+      $(e.target).css("background-color","red")
+      $("#name").attr({
+        "value":e.target.innerHTML
+      })
+      
+      var a=-1;
+      for(var i=0;i<subject.length;i++){
+       
+        if(subject[i]==e.target.innerHTML){
+          
+          a=i;
+          break;
+        }
+      }
+      
+      if(a==-1){
+        $("#a").val("")
+      }
+       console.log(arr[a])
+      $("#a").val(arr[a])
+    })
+
+   
+  })
+    } )
+
+    
+  $(document).ready(function(){
+     
+    
+    $("#cn button").click(function(e){
+      console.log("button")
+      $("button").css("background-color","blue")
+      $(e.target).css("background-color","red")
+      $("#name").attr({
+        "value":e.target.innerHTML
+      })
+      
+      var a=0;
+      for(var i=0;i<subject.length;i++){
+       
+        if(subject[i]==e.target.innerHTML){
+          
+          a=i;
+          break;
+        }
+      }
+       console.log(arr[a])
+      $("#a").val(arr[a])
+    })
+
+   
+    
+  })
+  
+</script>
             {{>footer}}
     </body>
 </html>
