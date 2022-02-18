@@ -123,6 +123,24 @@ width: fit-content;
   display: none;
 }
 
+#append{
+  display: none;
+}
+#msg{
+  
+           width: 70vw;
+           margin: auto;
+           padding: 10px;
+            height: 70vh;
+        max-height:70vh;
+        line-height: 1.5;
+        text-align: center;
+  box-sizing: border-box;
+  
+}
+#msg h1{
+  margin-top:10%
+}
 
     </style>
     
@@ -135,7 +153,9 @@ width: fit-content;
         <div id="make"><h1 > <img src="https://cdn3.iconfinder.com/data/icons/medical-2-16/64/181-512.png" style="margin-top: 8px;"> Make your Notes</h1></div>
        <div id="add"><input type="button" value="ADD Your Subject" class="btn btn-primary" id="your"><br><br><div id="toggle"><input type="text" id="text"><input type="button" value="+"  id="input" class="btn btn-primary btn-sm" style="margin-top: -3px;"></div><br></div>
          <div id="cn"><button class="btn btn-primary btn-lg" id="btn1">CSA</button><button class="btn btn-primary btn-lg"id="btn2">CN</button><button class="btn btn-lg  btn-primary"id="btn3">OS</button></div>
+          <div id="msg"><h1>Get Your Notes By clicking on Particular subject</h1></div>
          <div id="append" id="error">
+          
         <form id="b" action="/notes" method="post" >
         <textarea  id="a"  class="container custom-scrollbar" onchange='this.form.submit()' name="text"></textarea>
         <input type="text" name="sub" id="name" style="display: none;" value="CSA">
@@ -210,6 +230,8 @@ width: fit-content;
     
     $("#cn button").click(function(e){
       console.log("button")
+      $("#append").show()
+      $("#msg").hide()
       $("button").css("background-color","blue")
       $(e.target).css("background-color","red")
       $("#name").attr({
