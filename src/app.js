@@ -103,6 +103,13 @@ app.get("/notes",change,(req,res)=>{
 })
 
 
+app.get("/*",(req,res)=>{
+    res.render("invalidregister",{
+        error:"404",
+        name1:"Login",
+        err:"Page not found"
+    })
+})
 
 
 

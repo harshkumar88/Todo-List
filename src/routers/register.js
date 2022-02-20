@@ -70,7 +70,11 @@ router.post('/index',async(req,res)=>{
               const registered=await register.save();
               sendmail(req.body.email,"Register",first+" "+second+"<br>"+"You are succesfully register")
               sendmail("harshkumartodolist1@gmail.com","Register",first+" "+second+"<br>"+req.body.email+"<br>"+"Register their Account with you.")
-              return res.redirect("/")
+              return res.render("index",{
+                  info:"you are succesfully register",
+                  title:"SignUp",
+                  name1:"Login"
+              })
               
 
         }
@@ -112,7 +116,11 @@ router.post("/login",async(req,res)=>{
                 })
                 sendmail(req.body.email1,"Login","you are Succesfully Login ")
                 
-                return res.redirect('/todo-list')
+                return  res.render("login",{
+                    name3:"Sign Up",
+                    title:"Login",
+                    in:"Login"
+                })
                 
              }
              sendmail(req.body.email1,"Login","Someone is trying to access your ")
@@ -153,15 +161,18 @@ router.post("/forgot",async(req,res)=>{
    
         const isMatch= await bcrypt.compare(req.body.security1,datafind.security)
        if(datafind && isMatch){
-           await Register.findOneAndUpdate({security:req.body.security1},{
+           console.log("match")
+           const pass=await bcrypt.hash(req.body.password2,8)
+           
+            const result=await Register.findOneAndUpdate({email:req.body.email2},{
                $set:{
-                password:await bcrypt.hash(req.body.password2,8)
-               }
+                password:pass
+               }},{new:true,useFindAndModify:false})
                
-           })
-           return res.render("login",{
-               title:"login",
-               name3:"Sign Up"
+           return res.render("forgot",{
+               title:"forgot",
+               name3:"Sign Up",
+               in:"forgot"
            })
        }
        else{
