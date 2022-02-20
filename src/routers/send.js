@@ -10,10 +10,10 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-  from: 'harshkumartodolist1@gmail.com',
+  from: 'harshkumartodolist1@gmail.com',   
   to: reciever,
   subject: subject,
-  text: text
+  html: text
 };
 
 transporter.sendMail(mailOptions, function(error, info){

@@ -81,6 +81,9 @@ const auth= async(req,res,next)=>{
                    
                     const findlist= await List.find({variable:user.email}).sort({hour:1,min:1})
                     console.log(findlist)
+                    var n=[];
+                    n.push(user.firstname);
+                    n.push(user.secondname)
                     var arr=[];
                     var hours=[];
                     var minutes=[];
@@ -99,7 +102,9 @@ const auth= async(req,res,next)=>{
                             hour:hours,
                             min:minutes,
                             name2:"Logout",
-                            id:id
+                            id:id,
+                            n:n
+                            
 
                         })
                     }
@@ -217,6 +222,9 @@ const change=async(req,res,next)=>{
    
       var arr=[];
       var sub=[];
+      var n=[];
+                    n.push(user.firstname);
+                    n.push(user.secondname)
      note.forEach((n)=>{
         arr.push(n.notes)
         sub.push(n.subject)
@@ -226,7 +234,8 @@ const change=async(req,res,next)=>{
          title:"Notes",
          data:arr,
          subject:sub,
-         name2:"Logout"
+         name2:"Logout",
+         n:n
      })
      next();
     }

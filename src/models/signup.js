@@ -6,6 +6,17 @@ const jwt=require("jsonwebtoken");
 const { time } = require('console');
 
 const RegisterSchema=new mongoose.Schema({
+    firstname:{
+        type:String,
+        required:true,
+        trim:true
+    },
+    secondname:{
+               
+        type:String,
+        required:true,
+        trim:true
+    },
     email:{
         type:String,
         required:true,

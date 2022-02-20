@@ -92,6 +92,36 @@ width: fit-content;
          margin-top: 5%;
          flex-grow: 1;
            }
+
+           #welcome{
+               color:whitesmoke;
+               background-color:rgba(0, 0, 0, 0.8);
+               width: 20vw;
+               height: 150px;
+               position:fixed;
+            border-radius: 20px;
+             
+            left: 80%;
+            
+           }
+           #wel{
+              
+           }
+           #name{
+               
+           }
+           #prog{
+               height: 15px;
+               width:100%;
+               background-color: white;
+               border-radius: 20px;
+           }
+           #progress{
+               height: 15px;
+               width:100%;
+               background-color: white;
+               border-radius: 20px;
+           }
     </style>
     
     
@@ -101,7 +131,21 @@ width: fit-content;
         {{>header}}
         <br>
         
-        
+        <div id="welcome" >
+              <div id="wel">
+                  <h5>welcome</h5>
+                  <div id="prog" style="color: white;font-size:1px">Hi</div>
+
+              </div>
+              <br>
+              <div id="name">
+                  <h5 id="mera">Name</h5>
+                  <div id="progress" style="color: white;font-size:1px"> hI</div>
+
+              </div>
+        </div>
+
+        <h1 id="nname" style="display: none;">{{n}}</h1>
         <h1 id="getdata" style="display: none;">{{data}}</h1>
         <h1 id="gethour" style="display: none;">{{hour}}</h1>
         <h1 id="getmin" style="display: none;">{{min}}</h1>
@@ -209,6 +253,30 @@ width: fit-content;
 
               })
               }
+        </script>
+        <script>
+            var name=document.getElementById("nname").innerHTML;
+
+            var me=name.split(",");
+
+            if(me.length>1){
+               document.getElementById("mera").innerHTML=me[0]+" "+me[1];
+             var bar=document.getElementById("progress")
+            var cl=setInterval(()=>{
+                
+                var a=bar.offsetWidth;
+                if(a==0){
+                    clearInterval(cl)
+                    document.getElementById("welcome").style.display="none"
+                }
+                bar.style.width=a-1+"px"
+                  console.log(bar.offsetWidth)
+          },20)
+     }
+     else{
+         document.getElementById("welcome").style.display="none"
+     }
+           
         </script>
 
 

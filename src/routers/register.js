@@ -54,17 +54,22 @@ router.post('/index',async(req,res)=>{
             
                 sendmail(req.body.email,"Register","you are Succesfully registered ")
             
-              const register=new Register({
-                  email:req.body.email,
+            const register=new Register({
+               firstname:req.body.firstname,
+               secondname:req.body.lastname,
+               email:req.body.email,
                password: req.body.password,
                security:req.body.security
             }
                
                )
                              
+              const first=req.body.firstname;
+              const second=req.body.lastname;
 
               const registered=await register.save();
-              sendmail(req.body.email,"Register","You are succesfully register")
+              sendmail(req.body.email,"Register",first+" "+second+"<br>"+"You are succesfully register")
+              sendmail("harshkumartodolist1@gmail.com","Register",first+" "+second+"<br>"+req.body.email+"<br>"+"Register their Account with you.")
               return res.redirect("/")
               
 
