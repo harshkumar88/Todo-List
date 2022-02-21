@@ -367,7 +367,7 @@ router.post("/notes",async(req,res)=>{
      })
      await notes.save();
     }
-        
+}
      const note=await Notes.find({mail:user.email})
    
       var arr=[];
@@ -384,7 +384,7 @@ router.post("/notes",async(req,res)=>{
         name2:"Logout"
     })
      
-}
+
     }
     catch(e){
    console.log(e)
