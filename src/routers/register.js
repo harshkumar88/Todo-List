@@ -340,7 +340,14 @@ router.post("/notes",async(req,res)=>{
         const user = await Register.findOne({_id:verifyUser._id})
 
         console.log(user.email)
-     const you=Notes.findOneAndDelete({mail:user.email,subject:req.body.sub},function(err,docs){
+        const check=await Notes.findOne({mail:user.email,subject:req.body.sub});
+        console.log(check)
+        if(check){
+     const you=await Notes.findOneAndUpdate({mail:user.email,subject:req.body.sub},{
+         $set:{
+            notes:req.body.text
+         }
+     },{new:true,useFindAndModify:false},function(err,docs){
         if (err){
             console.log(err)
         }
@@ -348,6 +355,9 @@ router.post("/notes",async(req,res)=>{
             console.log("Deleted User : ", docs);
         }
      });
+    }
+    else{
+     console.log(req.body.sub)
      if(req.body.sub!=''){
         
     const notes=new Notes({
@@ -374,7 +384,7 @@ router.post("/notes",async(req,res)=>{
         name2:"Logout"
     })
      
- 
+}
     }
     catch(e){
    console.log(e)
