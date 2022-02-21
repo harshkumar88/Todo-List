@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
+  
     <head><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-32">
 
     <style>
        body{
@@ -177,6 +178,7 @@ width: fit-content;
     </head>
 
         {{>header}}
+        <h1 style="display: none;" id="inc">{{val}}</h1>
         <div id="welcome" >
               <div id="wel">
                   <h5>welcome</h5>
@@ -201,7 +203,7 @@ width: fit-content;
          <div id="append" id="error" class="bg-dark">
           
         <form id="b" action="/notes" method="post" class="bg-dark">
-        <textarea  id="a"  class="container custom-scrollbar bg-dark" name="text"></textarea>
+        <textarea  id="a"  class="container custom-scrollbar bg-dark" name="text" type="text"></textarea>
         <input type="submit" class="btn btn-primary" value='SAVE' >
         <input type="text" name="sub" id="see" style="display: none;">
         </form>
@@ -220,6 +222,32 @@ width: fit-content;
   var arr=data.split(",")
   var subject=sub.split(",")
 
+$(document).ready(function(){
+  var data=$("#inc").html()
+  console.log("here",data)
+  if(data!=''){
+    $("#msg").hide()
+    $("#append").show()
+    
+     var a=0;
+      for(var i=0;i<subject.length;i++){
+       
+        if(subject[i]==data){
+          
+          a=i;
+          break;
+        }
+      }
+       console.log(arr[a])
+      
+      $("#a").val(arr[a])
+      var btn=$("button")
+      console.log("btn",btn)
+      
+        
+  }
+
+})
  $(document).ready(function(){
    
    $("#your").click(function(){

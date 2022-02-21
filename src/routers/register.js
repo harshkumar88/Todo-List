@@ -354,7 +354,7 @@ router.post("/notes",async(req,res)=>{
         else{
             console.log("Deleted User : ", docs);
         }
-     });
+     }).clone();
     }
     else{
      console.log(req.body.sub)
@@ -381,7 +381,8 @@ router.post("/notes",async(req,res)=>{
         title:"Notes",
         data:arr,
         subject:sub,
-        name2:"Logout"
+        name2:"Logout",
+        val:req.body.sub
     })
      
 
