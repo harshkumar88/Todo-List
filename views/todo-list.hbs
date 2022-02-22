@@ -105,16 +105,16 @@ width: fit-content;
             
            }
            #welcome h5{
-             font-size: 1rem;
+              font-size: 90%;
            }
            #prog{
-               height: 15px;
+                  height: 12px;
                width:100%;
                background-color: white;
                border-radius: 20px;
            }
            #progress{
-               height: 15px;
+                  height: 12px;
                width:100%;
                background-color: white;
                border-radius: 20px;
@@ -216,6 +216,8 @@ width: fit-content;
               btn.click()
                document.getElementById("mera").innerHTML=me[0]+" "+me[1];
              var bar=document.getElementById("progress")
+              var b=document.getElementById("prog")
+              
              setTimeout(()=>{
                
             
@@ -236,6 +238,14 @@ width: fit-content;
          document.getElementById("welcome").style.display="none"
      }
            
+           $(document).ready(function(){
+             $(window).resize(function(){
+      
+                var wid=b.offsetWidth;
+               console.log("hi",wid)
+                    bar.style.width=wid+"px"
+             })
+           })
         </script> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
@@ -316,6 +326,7 @@ width: fit-content;
               })
               }
         </script>
+          
        
 
             {{>footer}}
