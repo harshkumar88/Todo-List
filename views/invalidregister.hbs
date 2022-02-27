@@ -6,7 +6,13 @@
  <style>
     
      footer div{
-             border: 2px solid black;
+             border-top: 2px solid black;
+           }
+           #error h1{
+               color: red;font-size:170px;
+           }
+           #error p{
+               font-weight: bold;font-size:30px
            }
 
            body{
@@ -20,13 +26,22 @@ width: fit-content;
          margin-top: 10%;
          flex-grow: 1;
            }
+           @media only screen and (max-width: 700px) {
+  body {
+   
+    font-size: 12px;
+  }
+  #error h1{
+      font-size: 50px;
+  }
+}
  </style>
     </head>
     <body>
         {{>header}}
         <div id="error">
-        <h1 style="color: red;font-size:170px">{{error}}</h1>
-        <p style="font-weight: bold;font-size:30px">{{err}}</p>
+        <h1>{{error}}</h1>
+        <p>{{err}}</p>
         </div>
          {{>footer}}
     </body>

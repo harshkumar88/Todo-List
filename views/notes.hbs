@@ -10,7 +10,7 @@
        }
        #append{
        
-           background-color: white;
+           background-color: rgba(255, 255, 255, 0.822);
            width: 90vw;
            margin: auto;
            padding: 10px;
@@ -18,15 +18,14 @@
         max-height:75vh;
         
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.479);
+ 
  
        
 
        }
        #b,#a{
          
-         color: whitesmoke;
-          background-color: rgba(0, 0, 0, 0.479);
+          background-color: rgba(255, 255, 255, 0.884);
          width:100%;
          height: 55vh;
          
@@ -112,12 +111,15 @@ width: fit-content;
   justify-content: space-around;
   border:2px solid black ;
   background-color: blueviolet;
+
  
 }
 
 #add{
   width:fit-content;
   margin: auto;
+  
+  
   
 }
 #toggle{
@@ -143,6 +145,7 @@ width: fit-content;
   margin-top:10%
 }
 #welcome{
+  margin: auto;
                color:whitesmoke;
             
                width: 20vw;
@@ -158,13 +161,13 @@ width: fit-content;
            }
            #prog{
                height: 12px;
-               width:100%;
+               width:98%;
                background-color: white;
                border-radius: 20px;
            }
            #progress{
                height: 12px;
-               width:100%;
+               width:98%;
                background-color: white;
                border-radius: 20px;
            }
@@ -174,6 +177,27 @@ width: fit-content;
              margin: auto;
            
            }
+           @media only screen and (max-width: 600px) {
+  body {
+   
+    font-size: 12px;
+  }
+  #msgs{
+    font-size: 20px;
+  }
+  #msg{
+    height: 20vh;
+  }
+  #add{
+    margin-top: -10%;
+  }
+  #cn{
+      margin-top: -5%;
+  }
+  #notesmodal{
+    min-width: 100px;
+  }
+}
 
     </style>
     
@@ -191,10 +215,10 @@ width: fit-content;
        <div id="add"><input type="button" value="ADD Your Subject" class="btn btn-primary" id="your"><br><br><div id="toggle"><input type="text" id="text"><input type="button" value="+"  id="input" class="btn btn-primary btn-sm" style="margin-top: -3px;"></div><br></div>
          <div id="cn"></div>
           <div id="msg"><h1 id="msgs">Get Your Notes By clicking on Particular subject</h1></div>
-         <div id="append" id="error" class="bg-dark">
+         <div id="append" id="error" >
            <input type="button" class="btn btn-danger" value="X" style="margin-left:92%" id="cross">
-        <form id="b" action="/notes" method="post" class="bg-dark">
-        <textarea  id="a"  class="container custom-scrollbar bg-dark" name="text" type="text"></textarea>
+        <form id="b" action="/notes" method="post">
+        <textarea  id="a"  class="container custom-scrollbar " name="text" type="text"></textarea>
        
         <input type="submit" class="btn btn-primary" value='SAVE' >
         <input type="text" name="sub" id="see" style="display: none;">
