@@ -123,9 +123,10 @@ width: fit-content;
              background-color: rgba(0, 0, 0, 0.671);
              width: 25vw;
              margin: auto;
+             max-height: 25vh;
            
            }
-           @media only screen and (max-width: 700px) {
+           @media only screen and (max-width: 600px) {
   body {
    
     font-size: 12px;
@@ -133,6 +134,13 @@ width: fit-content;
   #tasks{
   font-size: 22px;
 }
+#notesmodal{
+  margin: auto;
+  min-width: 100px;
+             
+             max-height: 18vh;
+           
+           }
 }
 
     </style>
@@ -328,7 +336,7 @@ width: fit-content;
               
               arr.forEach(function(dat){
      
-                 $div.innerHTML=$div.innerHTML+"<div>"+"<span>"+hour[i]+":"+min[i]+" "+Am[i]+"</span>"+"<br>"+"<input type='checkbox' onchange='this.form.submit()' name='checkbox' value='<%=dat %>' class='hi'>"+"</input>"+"<h4 name='del'>"+dat+"</h4>"+"</div>"
+                 $div.innerHTML=$div.innerHTML+"<div style='width:fit-content'>"+"<span>"+hour[i]+":"+min[i]+" "+Am[i]+"</span>"+"<br>"+"<input type='checkbox' onchange='this.form.submit()' name='checkbox' value='<%=dat %>' class='hi'>"+"</input>"+"<h4 name='del'>"+dat+"</h4>"+"</div>"
                   document.getElementsByClassName("hi")[i].value=id[i]
                  i=i+1;
                 
