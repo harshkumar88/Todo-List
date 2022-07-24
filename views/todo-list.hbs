@@ -180,7 +180,7 @@ width: fit-content;
             <input type="text" name="todo" required placeholder="Enter your Task " id="work">
             <button type="submit" class="btn btn-md " style="border-radius: 50%;background-color:blueviolet;font-weight:bold" id="again"> + </button>
         </form>
-        <button type="button" id="hide" class="btn btn-md" style="background-color:blueviolet;font-weight:bold">Add your Task</button>
+        <button type="button" id="hide" class="btn btn-md" style="background-color:blueviolet;font-weight:bold;float:right">Add your Task</button>
          </div>
         <h1>{{value}}</h1>
          
@@ -242,12 +242,12 @@ width: fit-content;
             var cl=setInterval(()=>{
                 
                 var a=bar.offsetWidth;
-                if(a==0){
+                if(a<10){
                     clearInterval(cl)
                     document.getElementById("welcome").style.display="none"
                       $("#direct").click()
                 }
-                bar.style.width=a-1+"px"
+                bar.style.width=a-3+"px"
                   console.log(bar.offsetWidth)
           },20)
            },1000)
@@ -336,7 +336,7 @@ width: fit-content;
               
               arr.forEach(function(dat){
      
-                 $div.innerHTML=$div.innerHTML+"<div style='width:fit-content'>"+"<span>"+hour[i]+":"+min[i]+" "+Am[i]+"</span>"+"<br>"+"<input type='checkbox' onchange='this.form.submit()' name='checkbox' value='<%=dat %>' class='hi'>"+"</input>"+"<h4 name='del'>"+dat+"</h4>"+"</div>"
+                 $div.innerHTML=$div.innerHTML+"<div>"+"<span>"+hour[i]+":"+min[i]+" "+Am[i]+"</span>"+"<br>"+"<input type='checkbox' onchange='this.form.submit()' name='checkbox' value='<%=dat %>' class='hi'>"+"</input>"+"<h4 name='del' >"+dat+"</h4>"+"<hr>"+"</div>"
                   document.getElementsByClassName("hi")[i].value=id[i]
                  i=i+1;
                 

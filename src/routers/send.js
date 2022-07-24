@@ -4,8 +4,8 @@ var sendmail=(reciever,subject,text)=>{
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'harshkumartodolist1@gmail.com',
-    pass: 'harshtodo1kumar@'
+    user: 'harsh',
+    pass: 'harshtodo88kumar@'
   }
 });
 
